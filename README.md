@@ -48,7 +48,7 @@ src-tauri/target/x86_64-pc-windows-gnu/release/mdm.exe
 - 手动触发（Actions → build → Run workflow）或推送 `v*` 标签：在 `windows-latest` 上使用 Rust MSVC 工具链构建 NSIS 安装包，并上传 `mdm-windows` artifact，其中包含安装包和免安装 `mdm.exe`。
 - CI 不需要本地 MinGW，也不依赖本地 Windows GNU 测试运行器。
 
-> 当前目录还不是 git 仓库；执行 `git init` 并推送到 GitHub 后，workflow 才会生效。构建产物在对应 Actions 运行的 Artifacts 区域下载。
+> 仓库已初始化并推送到 GitHub；在 Actions 页面手动运行 `build`，或推送 `v*` 标签即可构建。构建产物在对应运行的 Artifacts 区域下载。
 
 ### 3. 启动
 
