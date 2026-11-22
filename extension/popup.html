@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MDM 下载接管</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header class="head">
+      <div class="brand">
+        <img src="icons/icon48.png" alt="" width="30" height="30" />
+        <div>
+          <strong>MDM</strong>
+          <span>下载接管</span>
+        </div>
+      </div>
+      <span id="status-dot" class="dot"></span>
+    </header>
+    <main>
+      <section id="health" class="health"></section>
+      <section class="stats">
+        <div><strong id="active-count">0</strong><span>进行中</span></div>
+        <div><strong id="speed">0 B/s</strong><span>总速度</span></div>
+        <div><strong id="done-count">0</strong><span>已完成</span></div>
+      </section>
+      <section class="row">
+        <div>
+          <strong>接管 Chrome 下载</strong>
+          <p id="intercept-hint">新下载将自动交给 MDM</p>
+        </div>
+        <button id="toggle" class="switch" type="button" aria-label="切换接管"></button>
+      </section>
+      <section class="tasks-head">
+        <strong>最近任务</strong>
+        <button id="refresh" class="text-btn" type="button">刷新</button>
+      </section>
+      <section id="tasks" class="tasks"></section>
+    </main>
+    <footer>
+      <button id="options" class="primary" type="button">设置连接</button>
+      <span id="version" class="version"></span>
+    </footer>
+    <script src="popup.js"></script>
+  </body>
+</html>

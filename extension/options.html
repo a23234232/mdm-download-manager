@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MDM 下载接管 · 设置</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <img src="icons/icon128.png" alt="" width="52" height="52" />
+        <div>
+          <h1>MDM 下载接管</h1>
+          <p>把 Chrome 下载交给 MDM · 64 分片 · HTTP / FTP / HLS / DASH</p>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>连接</h2>
+        <p class="hint">在 MDM 桌面端「设置 → Chrome 扩展」中复制 API 地址和令牌。默认端口 45721。</p>
+        <div class="grid">
+          <label class="field">
+            <span>API 端口</span>
+            <input id="port" type="number" min="1024" max="65535" step="1" placeholder="45721" />
+          </label>
+          <label class="field grow">
+            <span>API 令牌</span>
+            <div class="token-row">
+              <input id="token" type="password" spellcheck="false" placeholder="32–96 位十六进制令牌" />
+              <button id="show-token" class="btn ghost" type="button">显示</button>
+            </div>
+          </label>
+        </div>
+        <div id="status" class="status">尚未测试连接</div>
+        <div class="actions">
+          <button id="test" class="btn ghost" type="button">测试连接</button>
+          <button id="save" class="btn primary" type="button">保存设置</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>行为</h2>
+        <label class="switch-row">
+          <div><strong>接管 Chrome 下载</strong><p>开启后，新建的 HTTP(S) 下载会被取消并转交 MDM。</p></div>
+          <input id="intercept" type="checkbox" />
+        </label>
+        <label class="switch-row">
+          <div><strong>转发登录 Cookie</strong><p>把当前浏览器会话 Cookie 发送给本地 MDM，用于需要登录的链接。</p></div>
+          <input id="cookies" type="checkbox" />
+        </label>
+        <label class="switch-row">
+          <div><strong>桌面通知</strong><p>接管成功或失败时显示系统通知。</p></div>
+          <input id="notify" type="checkbox" />
+        </label>
+      </section>
+
+      <section class="card tip">
+        <h2>快速开始</h2>
+        <ol>
+          <li>启动 MDM 桌面端，确认标题栏显示「扩展在线」。</li>
+          <li>在桌面端打开「设置 → Chrome 扩展」，点「复制令牌」。</li>
+          <li>把它粘贴到上方令牌框，测试连接并保存。</li>
+          <li>在 Chrome 中点击下载链接，任务会自动出现在 MDM。</li>
+        </ol>
+        <p class="muted">如果 MDM 未运行，扩展会放行 Chrome 原生下载，不会丢失文件。快捷键 <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>M</kbd> 可临时切换接管。</p>
+      </section>
+
+      <footer>MDM Download Manager · 本地回环 API 只监听 127.0.0.1</footer>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

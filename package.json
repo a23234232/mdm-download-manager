@@ -1,0 +1,84 @@
+{
+  "name": "mdm-download-manager",
+  "version": "0.1.0",
+  "description": "MDM — a modern multi-protocol download manager with 64-segment acceleration and a Chrome extension",
+  "main": "./out/main/index.js",
+  "author": "MDM",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build:web": "vite build --config vite.tauri.config.ts",
+    "tauri:build": "npm run build:web && tauri build --target x86_64-pc-windows-gnu --no-bundle",
+    "tauri:bundle": "npm run build:web && tauri build --target x86_64-pc-windows-gnu",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "package": "npm run build && electron-builder --dir",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "icons": "node scripts/make-icons.mjs",
+    "extension:check": "node scripts/check-extension.mjs"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.5",
+    "basic-ftp": "^6.2.6",
+    "fast-xml-parser": "^5.12.1"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.12.6",
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "electron": "^45.4.1",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^5.0.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8",
+    "vitest": "^5.1.1"
+  },
+  "build": {
+    "appId": "com.mdm.downloadmanager",
+    "productName": "MDM Download Manager",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "out/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "extension",
+        "to": "chrome-extension",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "docs",
+        "to": "docs",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "MDM-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true
+    }
+  }
+}
